@@ -1,6 +1,6 @@
 import requests
 import re
-url = "http://qq.ip138.com/huoche/search.asp?from=上海"
+url = "http://qq.ip138.com/huoche/search.asp?from="
 root = "&act=3"
 kv = {'User-Agent': 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us)'
                     ' AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405'}
@@ -8,12 +8,14 @@ ks = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 '
                     '(KHTML, like Gecko) Chrome/35.0.1916.157 Safari/537.36'}
 hd = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 '
                     '(KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'}
-train_start_end = {'to': '北京'}
+origin = input("站点A: ")
+destination = input("站点B: ")
+train_start_end = {'to': destination}
 
 
 def train_time_find(url, test=False):
     try:
-        ttf = requests.post(url + root, headers=kv, params=train_start_end, timeout=10)
+        ttf = requests.post(url + origin + root, headers=kv, params=train_start_end, timeout=10)
         ttf.raise_for_status()
         ttf.encoding = ttf.apparent_encoding
         if test is True:
